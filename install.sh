@@ -46,7 +46,11 @@ fi
 echo -e "${YELLOW}安装依赖...${NC}"
 if [ "$has_cuda" = true ]; then
     # 根据 CUDA 版本选择合适的 PyTorch 版本
-    if [[ $cuda_version == 11.8* ]]; then
+    if [[ $cuda_version == 12.0* ]]; then
+        echo -e "${YELLOW}检测到 CUDA 12.0，安装兼容的 PyTorch...${NC}"
+        echo -e "${YELLOW}注意：如果安装失败，建议降级到 CUDA 11.8 或使用 CPU 版本${NC}"
+        pip install torch==2.0.0+cu120 torchaudio==2.0.0+cu120 --extra-index-url https://download.pytorch.org/whl/cu120
+    elif [[ $cuda_version == 11.8* ]]; then
         echo -e "${YELLOW}安装 CUDA 11.8 兼容的 PyTorch...${NC}"
         pip install torch==2.0.0+cu118 torchaudio==2.0.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
     elif [[ $cuda_version == 11.7* ]]; then
@@ -57,6 +61,7 @@ if [ "$has_cuda" = true ]; then
         pip install torch==2.0.0+cu116 torchaudio==2.0.0+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
     else
         echo -e "${YELLOW}未找到完全匹配的 CUDA 版本，尝试安装 CUDA 11.8 兼容的 PyTorch...${NC}"
+        echo -e "${YELLOW}如果安装失败，建议使用 CPU 版本的 PyTorch${NC}"
         pip install torch==2.0.0+cu118 torchaudio==2.0.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
     fi
 else

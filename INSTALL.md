@@ -84,6 +84,9 @@ python test/test_fx_chain.py
 如果您遇到 CUDA 相关错误，可能是 PyTorch 版本与您的 CUDA 版本不兼容。请尝试安装与您的 CUDA 版本匹配的 PyTorch：
 
 ```bash
+# 对于 CUDA 12.0
+pip install torch==2.0.0+cu120 torchaudio==2.0.0+cu120 --extra-index-url https://download.pytorch.org/whl/cu120
+
 # 对于 CUDA 11.8
 pip install torch==2.0.0+cu118 torchaudio==2.0.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
@@ -93,6 +96,8 @@ pip install torch==2.0.0+cu117 torchaudio==2.0.0+cu117 --extra-index-url https:/
 # 如果不需要 CUDA 支持
 pip install torch==2.0.0 torchaudio==2.0.0
 ```
+
+注意：如果您使用的是 CUDA 12.0，建议使用 PyTorch 2.0.0 或更高版本，因为较早版本的 PyTorch 可能不完全支持 CUDA 12.0。如果遇到兼容性问题，可以考虑降级到 CUDA 11.8 或使用 CPU 版本的 PyTorch。
 
 ### 2. laion_clap 安装问题
 
