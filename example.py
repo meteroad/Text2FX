@@ -4,7 +4,7 @@ from text2fx import Text2FX
 
 def main():
     # 设置参数
-    audio_path = "short_riff.wav"  
+    audio_path = "audio/short_riff.wav"  
     target_text = "音色温暖，带有轻微混响"
     
     # 加载音频
