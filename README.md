@@ -1,6 +1,6 @@
 # Text2FX: 基于CLAP嵌入的文本引导音频效果
 
-本项目是对论文"Text2FX: Harnessing CLAP Embeddings for Text-Guided Audio Effects"的实现，该方法利用CLAP（Contrastive Language-Audio Pretraining）模型的嵌入表示，通过梯度优化来调整音频效果参数，使处理后的音频在嵌入空间中接近目标文本描述。
+本项目是对论文"Text2FX: Harnessing CLAP Embeddings for Text-Guided Audio Effects"的复现，该方法利用CLAP（Contrastive Language-Audio Pretraining）模型的嵌入表示，通过梯度优化来调整音频效果参数，使处理后的音频在嵌入空间中接近目标文本描述。
 
 ## 功能特点
 
