@@ -26,7 +26,7 @@ def main():
         print(f"生成的测试音频形状: {audio.shape}")
     
     # 初始化Text2FX
-    text2fx = Text2FX(device='cpu')
+    text2fx = Text2FX()
     
     # 使用余弦相似度方法优化
     print("\n使用余弦相似度方法优化...")

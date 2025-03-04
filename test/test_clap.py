@@ -9,8 +9,8 @@ import os
 sys.path.append('..')
 
 # 设置设备
-# device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-device = torch.device('cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cpu')
 print(f"Using device: {device}")
 
 # 加载模型

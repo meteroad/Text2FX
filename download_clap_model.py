@@ -2,6 +2,7 @@ import os
 import laion_clap
 import subprocess
 import sys
+from transformers import BertTokenizer
 
 def download_file(url, destination):
     """使用wget下载文件，支持断点续传"""
@@ -26,7 +27,36 @@ def download_file(url, destination):
             print("错误: 系统中未找到wget或curl。请手动下载文件。")
             return False
 
+def download_bert_tokenizer():
+    """下载BERT tokenizer"""
+    print("开始下载BERT tokenizer...")
+    try:
+        # 设置缓存目录
+        cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
+        os.makedirs(cache_dir, exist_ok=True)
+        
+        # 下载tokenizer
+        tokenizer = BertTokenizer.from_pretrained(
+            "bert-base-uncased",
+            cache_dir=cache_dir,
+            local_files_only=False
+        )
+        print("BERT tokenizer下载完成")
+        return True
+    except Exception as e:
+        print(f"下载BERT tokenizer时出错: {str(e)}")
+        print("请确保网络连接正常，或者手动下载bert-base-uncased模型")
+        return False
+
 def main():
+    # 首先下载BERT tokenizer
+    if not download_bert_tokenizer():
+        print("警告: BERT tokenizer下载失败，这可能会影响CLAP模型的使用")
+        user_input = input("是否继续下载CLAP模型？(y/n): ")
+        if user_input.lower() != 'y':
+            print("下载已取消")
+            return
+    
     # 获取laion_clap包的位置
     package_dir = os.path.dirname(os.path.realpath(laion_clap.__file__))
     print(f"laion_clap包位置: {package_dir}")
@@ -34,6 +64,9 @@ def main():
     # 设置模型URL和目标路径
     model_url = "https://huggingface.co/lukewys/laion_clap/resolve/main/music_speech_epoch_15_esc_89.25.pt?download=true"
     model_path = os.path.join("checkpoint", "music_speech_epoch_15.pt")
+    
+    # 确保checkpoint目录存在
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
     
     # 检查模型文件是否已存在
     if os.path.exists(model_path):

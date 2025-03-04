@@ -61,11 +61,22 @@ pip install transformers wget
 
 ## 下载预训练模型
 
-安装完依赖后，您需要下载 CLAP 预训练模型：
+安装完依赖后，您需要下载 CLAP 预训练模型和BERT tokenizer：
 
 ```bash
 python download_clap_model.py
 ```
+
+注意：此脚本会自动下载以下内容：
+1. BERT tokenizer（约500MB）
+2. CLAP预训练模型（约1.7GB）
+
+如果下载过程中遇到网络问题，您可以：
+1. 确保网络连接正常
+2. 使用代理或VPN
+3. 手动下载模型文件：
+   - BERT tokenizer: https://huggingface.co/bert-base-uncased
+   - CLAP模型: https://huggingface.co/lukewys/laion_clap/resolve/main/music_speech_epoch_15_esc_89.25.pt
 
 ## 验证安装
 
